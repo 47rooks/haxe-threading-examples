@@ -1,6 +1,6 @@
 -hl bin\main.hl
 -cp src
--main Main
+-main SimpleReaderWriter
 
 --next 
 

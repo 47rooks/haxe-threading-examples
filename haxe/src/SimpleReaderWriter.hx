@@ -99,20 +99,20 @@ class Writer {
 }
 
 /**
- * Main runs a multithreaded test where the objective is
- * for the reader to see only matching Data.x and Data.y
- * while the writer changes the values to a new random
- * value each iteration.
+ * SimpleReaderWrite runs a multithreaded test where the
+ * objective is for the reader to see only matching Data.x
+ * and Data.y while the writer changes the values to a new
+ * random value each iteration.
  * 
  * Only with mutexing enabled will this actually pass 
  * through all iterations. Of course lowering the iteration
  * count will reduce the probability of failure but it won't
  * make it thread safe.
  */
-class Main {
+class SimpleReaderWriter {
 	public static function main() {
 		var start = Timer.stamp();
-		trace('Main starting at ${start}');
+		trace('main() starting at ${start}');
 
 		// Create a data class
 		var d = new Data();
@@ -153,7 +153,7 @@ class Main {
 		l.wait();
 
 		var end = Timer.stamp();
-		trace('Main ending at ${end}');
+		trace('main() ending at ${end}');
 		trace('elapsed=${end - start}');
 	}
 }
