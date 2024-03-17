@@ -1,0 +1,22 @@
+{
+  "folders": [
+    {
+      "name": "haxe",
+      "path": "haxe"
+    },
+    {
+      "name": "lime",
+      "path": "lime"
+    },
+    {
+      "name": "Haxe Threading Examples Project",
+      "path": "."
+    }
+  ],
+  "settings": {
+    "files.exclude": {
+      "haxe": true,
+      "lime": true
+    }
+  }
+}
