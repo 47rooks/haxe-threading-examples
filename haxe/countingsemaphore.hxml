@@ -1,0 +1,7 @@
+-hl bin\main.hl
+-cp src
+-main CountingSemaphore
+
+--next 
+
+--cmd "D:\Program Files\HashLink1.14\hl.exe" bin\main.hl

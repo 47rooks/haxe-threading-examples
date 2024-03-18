@@ -1,0 +1,24 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "hxml",
+			"file": "countingsemaphore.hxml",
+			"problemMatcher": [
+				"haxe-fake"
+			],
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			},
+			"label": "hxml: countingsemaphore.hxml"
+		},
+		{
+			"type": "haxe",
+			"args": "active configuration",
+			"problemMatcher": [],
+			"group": "build",
+			"label": "haxe: active configuration"
+		}
+	]
+}
