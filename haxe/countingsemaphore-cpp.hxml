@@ -1,0 +1,6 @@
+-cpp cpp
+-cp src
+-main CountingSemaphore
+
+--next 
+--cmd cpp\CountingSemaphore.exe
