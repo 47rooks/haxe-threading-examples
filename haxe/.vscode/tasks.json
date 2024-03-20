@@ -3,7 +3,7 @@
 	"tasks": [
 		{
 			"type": "hxml",
-			"file": "countingsemaphore.hxml",
+			"file": "producerconsumer.hxml",
 			"problemMatcher": [
 				"haxe-fake"
 			],
@@ -11,7 +11,19 @@
 				"kind": "build",
 				"isDefault": true
 			},
-			"label": "hxml: countingsemaphore.hxml"
+			"label": "hxml: producerconsumer.hxml"
+		},
+		{
+			"type": "hxml",
+			"file": "producerconsumer-cpp.hxml",
+			"problemMatcher": [
+				"haxe-fake"
+			],
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			},
+			"label": "hxml: producerconsumer-cpp.hxml"
 		},
 		{
 			"type": "haxe",

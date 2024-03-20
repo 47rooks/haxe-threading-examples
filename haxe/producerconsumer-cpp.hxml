@@ -1,0 +1,6 @@
+-cpp cpp
+-main ProducerConsumer
+--class-path src
+
+--next
+--run .\cpp\ProducerConsumer.exe
