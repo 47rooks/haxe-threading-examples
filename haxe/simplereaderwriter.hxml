@@ -1,4 +1,4 @@
--hl bin\main.hl
+-hl hl\main.hl
 -cp src
 -main SimpleReaderWriter
 

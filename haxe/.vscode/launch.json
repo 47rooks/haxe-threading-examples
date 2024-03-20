@@ -5,12 +5,19 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "HashLink (launch)",
+            "name": "HL ProducerConsumer (launch)",
             "request": "launch",
             "type": "hl",
             "hl": "D:\\Program Files\\HashLink1.14\\hl.exe",
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "name": "HL ProducerConsumer (attach)",
+            "request": "attach",
+            "port": 6112,
+            "type": "hl",
             "cwd": "${workspaceFolder}",
-            "preLaunchTask": "hxml: countingsemaphore.hxml"
+            "preLaunchTask": "hxml: producerconsumer.hxml"
         },
         {
             "name": "HashLink (attach)",

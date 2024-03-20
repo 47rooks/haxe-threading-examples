@@ -1,0 +1,9 @@
+# Note: currently this hangs on HL.
+# See https://github.com/HaxeFoundation/hashlink/issues/663
+
+-hl hl\main.hl
+-cp src
+-main ProducerConsumer
+
+--next
+--cmd "D:\Program Files\HashLink1.14\hl.exe" hl\main.hl
