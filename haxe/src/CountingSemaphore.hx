@@ -7,8 +7,8 @@ import sys.thread.Thread;
 
 final ITERATIONS = 1000;
 final NUM_FREE_SLOTS = 10;
-final SIZE_LIMITED = false;
-final MUTEXED = false;
+final SIZE_LIMITED = true;
+final MUTEXED = true;
 
 /**
  * A multi-thread safe FIFO queue.
@@ -72,6 +72,7 @@ class Consumer {
 
 			var l = _q.length;
 			trace('length of _q=' + Std.string(l));
+			// trace('length of _q=${l}');
 			if (l > NUM_FREE_SLOTS) {
 				trace('queue length exceeded ' + NUM_FREE_SLOTS + '. length=' + Std.string(l));
 			}

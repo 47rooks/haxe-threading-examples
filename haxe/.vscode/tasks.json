@@ -3,6 +3,18 @@
 	"tasks": [
 		{
 			"type": "hxml",
+			"file": "countingsemaphore.hxml",
+			"problemMatcher": [
+				"haxe-fake"
+			],
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			},
+			"label": "hxml: countingsemaphore.hxml"
+		},
+		{
+			"type": "hxml",
 			"file": "producerconsumer.hxml",
 			"problemMatcher": [
 				"haxe-fake"
