@@ -4,6 +4,7 @@
     // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
+
         {
             "name": "HashLink (launch)",
             "request": "launch",
@@ -37,6 +38,14 @@
                 "type": "haxe",
                 "args": "active configuration"
             }
+        },
+        {
+            "name": "HL SimpleFutures (attach)",
+            "request": "attach",
+            "port": 6112,
+            "type": "hl",
+            "cwd": "${workspaceFolder}",
+            "preLaunchTask": "lime: test hl -debug"
         }
     ]
 }
