@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project>
+
+	<meta title="SimpleFutures" package="com.sample.simplefutures" version="1.0.0"
+		company="Company Name" />
+	<app main="SimpleFutures" path="Export" file="SimpleFutures" />
+
+	<source path="Source" />
+
+	<haxelib name="lime" />
+
+	<assets path="Assets" rename="assets" />
+
+</project>

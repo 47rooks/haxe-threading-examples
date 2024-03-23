@@ -1,0 +1,35 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "HL SimpleFutures (attach)",
+            "request": "attach",
+            "port": 6112,
+            "type": "hl",
+            "cwd": "${workspaceFolder}",
+            "preLaunchTask": "lime: test hl -debug"
+        },
+		{
+			"name": "Build + Debug",
+			"type": "lime",
+			"request": "launch"
+		},
+		{
+			"name": "Debug",
+			"type": "lime",
+			"request": "launch",
+			"preLaunchTask": null
+		},
+        {
+            "name": "HashLink (debugger)",
+            "type": "hl",
+            "request": "launch",
+            "hl": "D:\\Program Files\\HashLink1.14\\hl.exe",
+            "cwd": "D:\\UserData\\Daniel\\Code\\Haxe\\haxe-threading-examples\\lime\\simple-futures\\Export\\hl\\bin",
+            "program": "D:\\UserData\\Daniel\\Code\\Haxe\\haxe-threading-examples\\lime\\simple-futures\\Export\\hl\\bin\\hlboot.dat"
+		},
+    ]
+}
