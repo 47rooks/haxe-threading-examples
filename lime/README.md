@@ -7,3 +7,7 @@ Note that for Lime Futures related examples you will need to use Lime 8.2.0-Dev 
 https://github.com/openfl/lime/tree/develop?tab=readme-ov-file describes how to get development nightly build
 versions of Lime. Refer to the Development Builds section. While this link will age https://github.com/openfl/lime/actions/runs/7848199962 has lime-haxelib.zip that works.
 
+## References
+
+There is an article posted on Lime threading https://player03.com/openfl/threads-guide/. It doesn't make clear that it is 8.2.0 that's in use but once you get that clear the article is helpful on a number of fronts.
+
