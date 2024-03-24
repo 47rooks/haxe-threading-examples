@@ -58,7 +58,7 @@ class SimpleFutures extends Application {
 		 * the tasks. Note that the Future takes the actual work
 		 * function as its first parameter.
 		 * 
-		 * To the Future is then added callbacks for completion and
+		 * To the Future are then added callbacks for completion and
 		 * error handling. The completion and error handlers are
 		 * called in the main thread. The work function itself is
 		 * called in the threadpool thread.

@@ -14,7 +14,7 @@
     }
   ],
   "settings": {
-    "lime.projectFile": "..\\lime\\simple-futures\\project.xml",
+    "lime.projectFile": "..\\lime\\simple-promises\\project.xml",
     "files.exclude": {
       "haxe": true,
       "lime": true

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project>
+
+	<meta title="SimplePromise" package="com.sample.simplepromises" version="1.0.0"
+		company="Company Name" />
+	<app main="SimplePromise" path="Export" file="SimplePromise" />
+
+	<source path="Source" />
+
+	<haxelib name="lime" />
+
+	<assets path="Assets" rename="assets" />
+
+</project>
