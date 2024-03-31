@@ -9,5 +9,5 @@ versions of Lime. Refer to the Development Builds section. While this link will 
 
 ## References
 
-There is an article posted on Lime threading https://player03.com/openfl/threads-guide/. It doesn't make clear that it is 8.2.0 that's in use but once you get that clear the article is helpful on a number of fronts.
+There is an article posted on Lime threading https://player03.com/openfl/threads-guide/. The article is helpful on a number of fronts.
 
