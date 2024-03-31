@@ -14,7 +14,7 @@
     }
   ],
   "settings": {
-    "lime.projectFile": "..\\lime\\simple-promises\\project.xml",
+    "lime.projectFile": "..\\lime\\simple-threadpool\\project.xml",
     "files.exclude": {
       "haxe": true,
       "lime": true
