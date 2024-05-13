@@ -13,9 +13,9 @@ import lime.system.WorkOutput;
  * for the input values. See `CancellableFibonacciState` for 
  * an example that stores intermediate state.
  */
-typedef FibonacciState = {
-	var i1:Int; // Initial value 1
-	var i2:Int; // Initial value 2
+@:structInit class FibonacciState {
+	public var i1:Int; // Initial value 1
+	public var i2:Int; // Initial value 2
 }
 
 /**
@@ -25,9 +25,9 @@ typedef FibonacciState = {
  * object so it can resume where it left off. In order for this to work
  * the job must stash its current state in this object before returning.
  */
-typedef CancellableFibonacciState = {
-	var iteration:Int; // the current iteration
-	var partialResult:Array<Int>; // The current sequence values
+@:structInit class CancellableFibonacciState {
+	public var iteration:Int; // the current iteration
+	public var partialResult:Array<Int>; // The current sequence values
 }
 
 /**
@@ -35,18 +35,18 @@ typedef CancellableFibonacciState = {
  * errors to the main thread.
  * The `onError()` function must understand this object.
  */
-typedef FibonacciError = {
-	var id:Int; // Job id
-	var exception:Exception;
+@:structInit class FibonacciError {
+	public var id:Int; // Job id
+	public var exception:Exception;
 }
 
 /**
  * A simple example progress object.
  * The `onProgress()` function must understand this object.
  */
-typedef FibonacciProgress = {
-	var id:Int; // Job id
-	var iterationsCompleted:Int;
+@:structInit class FibonacciProgress {
+	public var id:Int; // Job id
+	public var iterationsCompleted:Int;
 }
 
 /**
@@ -54,9 +54,9 @@ typedef FibonacciProgress = {
  * send one of these object via the `sendComplete()` function.
  * The `onComplete` function must understand this object.
  */
-typedef FibonacciResult = {
-	var id:Int; // Job id
-	var sequence:Array<Int>;
+@:structInit class FibonacciResult {
+	public var id:Int; // Job id
+	public var sequence:Array<Int>;
 }
 
 /**
@@ -108,7 +108,7 @@ class SimpleThreadpool extends Application {
 	 * Refer to `computeFibonacci()` and `cancellableComputeFibonacci()`
 	 * for details.
 	 */
-	final USE_CANCELLABLE_WORK_FUNCTION = false;
+	final USE_CANCELLABLE_WORK_FUNCTION = true;
 
 	/**
 	 * If you want to see a print of the number of threads currently
@@ -165,12 +165,14 @@ class SimpleThreadpool extends Application {
 				var jobId = -1;
 				// This is where the job itself is scheduled
 				if (USE_CANCELLABLE_WORK_FUNCTION) {
-					jobId = _tp.run(cancellableComputeFibonacci, {
+					var s:CancellableFibonacciState = {
 						iteration: 0,
 						partialResult: null
-					});
+					};
+					jobId = _tp.run(cancellableComputeFibonacci, s);
 				} else {
-					jobId = _tp.run(computeFibonacci, {i1: 1, i2: 1});
+					var s:FibonacciState = {i1: 1, i2: 1};
+					jobId = _tp.run(computeFibonacci, s);
 				}
 				trace('jobid=${jobId} started');
 			}
@@ -208,35 +210,42 @@ class SimpleThreadpool extends Application {
 	 * the main thread.
 	 */
 	function computeFibonacci(state:FibonacciState, output:WorkOutput) {
-		var rv = new Array<Int>();
-		rv.push(state.i1);
-		rv.push(state.i2);
-		for (i in 0...NUM_ITERATIONS) {
-			rv[i + 2] = rv[i] + rv[i + 1];
+		try {
+			var rv = new Array<Int>();
+			rv.push(state.i1);
+			rv.push(state.i2);
+			for (i in 0...NUM_ITERATIONS) {
+				rv[i + 2] = rv[i] + rv[i + 1];
 
-			if (output.activeJob.id == NUM_JOBS / 2 && i == NUM_ITERATIONS / 2) {
-				if (SEND_ERROR) {
-					output.sendError({id: output.activeJob.id, exception: new ValueException('computeFibonacci failed')});
-					// After calling sendError() the job must terminate
-					return;
+				if (output.activeJob.id == NUM_JOBS / 2 && i == NUM_ITERATIONS / 2) {
+					if (SEND_ERROR) {
+						output.sendError({id: output.activeJob.id, exception: new ValueException('computeFibonacci failed')});
+						// After calling sendError() the job must terminate
+						return;
+					}
+					throw new ValueException('ooops');
 				}
-				throw new ValueException('ooops');
+
+				/* If this is jobid 3 then send progress reports every 5% of the way through
+				 * the job. The reason for the trace is that it demonstrates that even when this
+				 * job is cancelled it continues running. But while it continues running the
+				 * sendProgress() messages are cut off by the framework so the main thread will
+				 * not see these updates even though they are still being sent.
+				 */
+				if (output.activeJob.id == 3 && i % (NUM_ITERATIONS / 20) == 0) {
+					var p:FibonacciProgress = {id: output.activeJob.id, iterationsCompleted: i};
+					output.sendProgress(p);
+					trace('It is me 3 !');
+				}
 			}
 
-			/* If this is jobid 3 then send progress reports every 5% of the way through
-			 * the job. The reason for the trace is that it demonstrates that even when this
-			 * job is cancelled it continues running. But while it continues running the
-			 * sendProgress() messages are cut off by the framework so the main thread will
-			 * not see these updates even though they are still being sent.
-			 */
-			if (output.activeJob.id == 3 && i % (NUM_ITERATIONS / 20) == 0) {
-				output.sendProgress({id: output.activeJob.id, iterationsCompleted: i});
-				trace('It is me 3 !');
-			}
+			// Send the final job completion output to the main thread.
+			var c:FibonacciResult = {id: output.activeJob.id, sequence: rv};
+			output.sendComplete(c);
+		} catch (e:Dynamic) {
+			trace('getting an error=$e');
+			output.sendError(e);
 		}
-
-		// Send the final job completion output to the main thread.
-		output.sendComplete({id: output.activeJob.id, sequence: rv});
 	}
 
 	/**
@@ -268,7 +277,8 @@ class SimpleThreadpool extends Application {
 			 * which continues running.
 			 */
 			if (output.activeJob.id == 3 && i % (NUM_ITERATIONS / 20) == 0) {
-				output.sendProgress({id: output.activeJob.id, iterationsCompleted: i});
+				var p:FibonacciProgress = {id: output.activeJob.id, iterationsCompleted: i};
+				output.sendProgress(p);
 				trace('It is me 3 !');
 			}
 
@@ -282,7 +292,8 @@ class SimpleThreadpool extends Application {
 		}
 
 		// Send the final job completion output to the main thread.
-		output.sendComplete({id: output.activeJob.id, sequence: rv});
+		var c:FibonacciResult = {id: output.activeJob.id, sequence: rv};
+		output.sendComplete(c);
 	}
 
 	/**
@@ -312,10 +323,10 @@ class SimpleThreadpool extends Application {
 		if (errorInfo is Exception) {
 			trace('(ERROR) Job ${_tp.activeJob.id} Got exception ${Type.typeof(errorInfo)}:${errorInfo}');
 		} else if (Reflect.hasField(errorInfo, 'id') && Reflect.hasField(errorInfo, 'exception')) {
-			trace('(ERROR) Job ${_tp.activeJob.id} Got error in job ${errorInfo.id}: ${errorInfo.exception}');
+			trace('(ERROR) Job ${_tp.activeJob.id} Got application error ${errorInfo.id}: ${errorInfo.exception}');
 			trace('errorInfo=${errorInfo}');
 		} else {
-			trace('(ERROR) Job ${_tp.activeJob.id} Got error: ${errorInfo}');
+			trace('(ERROR) Job ${_tp.activeJob.id} Got unknown error type: ${errorInfo}');
 		}
 		jobsCompleted++;
 	}
