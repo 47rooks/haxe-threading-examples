@@ -1,7 +1,8 @@
 # haxe-threading-examples
 Haxe threading examples
 
-This repo is devoted to examining threading in Haxe and Haxe libraries and gameframeworks.
+This repo is devoted to examining threading in Haxe and Haxe libraries and game
+frameworks.
 
 Initial examples are Haxe itself and then Lime Futures.
 

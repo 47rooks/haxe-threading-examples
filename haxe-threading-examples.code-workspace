@@ -1,6 +1,10 @@
 {
   "folders": [
     {
+      "name": "flixel",
+      "path": "flixel"
+    },
+    {
       "name": "lime",
       "path": "lime"
     },
@@ -14,10 +18,11 @@
     }
   ],
   "settings": {
-    "lime.projectFile": "..\\lime\\simple-threadpool\\project.xml",
+    "lime.projectFile": "..\\flixel\\LimeThreadPoolLoader\\Project.xml",
     "files.exclude": {
       "haxe": true,
-      "lime": true
+      "lime": true,
+      "flixel": true
     },
     "lime.targets": [
 
