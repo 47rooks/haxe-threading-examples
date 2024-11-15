@@ -1,0 +1,7 @@
+-hl hl\main.hl
+-cp src
+-main ThreadMessage
+
+--next 
+
+--cmd "D:\Program Files\HashLink1.14\hl.exe" hl\main.hl
